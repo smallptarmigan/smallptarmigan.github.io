@@ -7,6 +7,10 @@ function OnButtonClick() {
         });
     });
 
+    for(var i; i<arr.length; i++){
+      console.log(arr[i])
+    }
+
     var idelist = ["output1", "output2", "output3", "output4"]
     var idtlist = ["text1", "text2", "text3", "text4"]
 
