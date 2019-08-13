@@ -3,7 +3,7 @@ function OnButtonClick() {
 
     $(document).ready(function () {
         $.getJSON("https://smallptarmigan.github.io/data.json", function(data){
-            var arr = data["park_list"];
+            arr = data["park_list"];
         });
     });
 
