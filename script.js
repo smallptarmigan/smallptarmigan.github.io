@@ -13,7 +13,8 @@ function OnButtonClick() {
             }
         });
     });
-
+    
+    console.log("debag");
     //data = data["park_list"]
 
     var idelist = ["output1", "output2", "output3", "output4"]
