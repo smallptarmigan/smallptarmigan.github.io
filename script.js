@@ -1,5 +1,5 @@
 function OnButtonClick() {
-  var arr; 
+  var arr = []; 
 
   $(document).ready(function () {
     $.getJSON("https://smallptarmigan.github.io/data.json", function(data){
@@ -7,9 +7,9 @@ function OnButtonClick() {
     });
   });
 
-  for(var i; i<arr.length; i++){
-    console.log(arr[i])
-  }
+  
+  console.log(arr)
+  
 
   var idelist = ["output1", "output2", "output3", "output4"]
   var idtlist = ["text1", "text2", "text3", "text4"]
