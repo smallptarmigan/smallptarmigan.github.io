@@ -3,12 +3,14 @@ function OnButtonClick() {
     var data;
     $(document).ready(function () {
         $.getJSON("https://smallptarmigan.github.io/data.json", function(d){
-            var
-                ulObj = $("#demo"),
-                len = data.length;
-
-            for(var i = 0; i < len; i++) {
-                ulObj.append($("<li>").attr({"id":data[i].id}).text(data[i].name));
+            var arr = [];
+            $.each(data, function(key, val){
+              arr.push("key⇒" + key + " val⇒" + val);
+            });
+       
+            //取得したJSONデータをコンソールに表示する
+            for(let i in arr){
+              console.log(arr[i]);
             }
         });
     });
