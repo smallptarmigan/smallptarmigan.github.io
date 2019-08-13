@@ -17,5 +17,7 @@ function OnButtonClick() {
         target = document.getElementById(idtlist[i]);
         target.innerHTML = arr['name'];
     }
+
+    console.log("click")
 }
 
