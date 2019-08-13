@@ -1,8 +1,7 @@
 function OnButtonClick() {
    
-    var data;
     $(document).ready(function () {
-        $.getJSON("https://smallptarmigan.github.io/data.json", function(d){
+        $.getJSON("https://smallptarmigan.github.io/data.json", function(data){
             var arr = [];
             $.each(data, function(key, val){
               arr.push("key⇒" + key + " val⇒" + val);
