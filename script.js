@@ -2,11 +2,8 @@ function OnButtonClick() {
    
     $(document).ready(function () {
         $.getJSON("https://smallptarmigan.github.io/data.json", function(data){
-            var arr = [];
-            $.each(data["park_list"], function(key, val){
-              arr.push("name" + key + "pic" + val);
-            });
-       
+            var arr = data["park_list"];
+      
             //取得したJSONデータをコンソールに表示する
             for(let i in arr){
               console.log(arr[i]);
