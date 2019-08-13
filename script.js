@@ -4,7 +4,7 @@ function OnButtonClick() {
         $.getJSON("https://smallptarmigan.github.io/data.json", function(data){
             var arr = [];
             $.each(data, function(key, val){
-              arr.push("key⇒" + key + " val⇒" + val);
+              arr.push("name" + key + "pic" + val);
             });
        
             //取得したJSONデータをコンソールに表示する
@@ -13,7 +13,7 @@ function OnButtonClick() {
             }
         });
     });
-    
+
     console.log("debag");
     //data = data["park_list"]
 
