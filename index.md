@@ -1,0 +1,3 @@
+# smallptarmigan site
+
+* [DbDパークランダム](./dbd)
