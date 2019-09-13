@@ -1,6 +1,6 @@
 function OnButtonClick() {
   $(document).ready(function () {
-    $.getJSON("https://smallptarmigan.github.io/data.json", function(data){
+    $.getJSON("./data.json", function(data){
 
       var idelist = ["output1", "output2", "output3", "output4"];
       var idtlist = ["text1", "text2", "text3", "text4"];
