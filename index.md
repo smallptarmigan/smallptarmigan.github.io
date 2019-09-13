@@ -4,4 +4,4 @@
 
 * [DbDパークランダム](./dbd/index.html)
 
-* [ポーカー](./poker/temp.html)
+* [オセロ](./othello/temp.html)
