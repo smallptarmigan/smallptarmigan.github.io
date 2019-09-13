@@ -12,7 +12,7 @@ function OnButtonClick() {
         target = document.getElementById(idtlist[i]);
         target.innerHTML = data["park_list"][rand]['name'];
         target = document.getElementById(idelist[i]);
-        target.innerHTML = '<img src="https://smallptarmigan.github.io/park/'+data["park_list"][rand]['pic']+'" alt="park" width="100">';
+        target.innerHTML = '<img src="./park/'+data["park_list"][rand]['pic']+'" alt="park" width="100">';
         parklog[i] = rand;
       }
       // console.log(parklog);
