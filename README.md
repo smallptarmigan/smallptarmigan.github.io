@@ -5,17 +5,15 @@
 node.jsとnpmをaptでインストール
 
 ```
-sudo apt install -y nodejs npm
-
-sudo npm install n -g
+$ sudo apt install -y nodejs npm
+$ sudo npm install n -g
 ```
 
 古いパッケージの整理
 
 ```
-sudo n stable
-
-sudo apt purge -y nodejs npm
+$ sudo n stable
+$ sudo apt purge -y nodejs npm
 ```
 
 ## 実行環境作成
@@ -23,6 +21,7 @@ sudo apt purge -y nodejs npm
 npmプロジェクトの作成
 
 ```
-npm iniy
+$ npm init
+$ npm install --save-dev [package]
 ```
 
