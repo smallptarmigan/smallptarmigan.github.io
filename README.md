@@ -6,8 +6,12 @@ node.jsとnpmをaptでインストール
 
 ```
 $ sudo apt install -y nodejs npm
-$ sudo npm install n -g
+$ npm config set strict-ssl false
+$ sudo npm install n -g 
+$ npm config set strict-ssl true
 ```
+
+strict-sslはhttps のレジストリに対して、SSL 鍵のバリデーションの回避を一時的に行う。
 
 古いパッケージの整理
 
