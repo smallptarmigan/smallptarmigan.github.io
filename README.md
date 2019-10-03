@@ -22,10 +22,13 @@ $ sudo apt purge -y nodejs npm
 
 ## 実行環境作成
 
-npmプロジェクトの作成
+初めてnpmプロジェクトの作成
 
 ```
 $ npm init
 $ npm install --save-dev [package]
 ```
 
+npmプロジェクトを復元する
+
+ワカラナイ…
