@@ -13,10 +13,14 @@ var Board = /** @class */ (function () {
         var ctx = canvas.getContext("2d");
         if (ctx !== null) {
             ctx.beginPath();
-            ctx.fillStyle = "#abc";
-            ctx.rect(100, 100, 100, 100);
-            ctx.rect(200, 200, 100, 100);
-            ctx.rect(300, 300, 100, 100);
+            for (var i = 0; i < 8; i++) {
+                for (var j = 0; j < 8; j++) {
+                    if ((i + j) % 2 == 0) {
+                        ctx.fillStyle = "#abc";
+                        ctx.rect(30 + (i * 30), 30 + (j * 30), 30, 30);
+                    }
+                }
+            }
             ctx.fill();
         }
     };
