@@ -1,7 +1,7 @@
 {
   "name": "othello",
   "version": "1.0.0",
-  "description": "",
+  "description": "tsの勉強のために、軽いプログラムを作成する。",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^3.6.3",
+    "typescript": "^3.6.4",
     "watchify": "^3.11.1"
-  }
+  },
+  "dependencies": {}
 }

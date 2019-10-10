@@ -19,6 +19,7 @@ strict-sslはhttps のレジストリに対して、SSL 鍵のバリデーショ
 ```
 $ sudo n stable
 $ sudo apt purge -y nodejs npm
+$ sudo chown -R $USER:$(id -gn $USER) /home/shimizu/.config
 ```
 
 ## 実行環境作成
@@ -28,8 +29,10 @@ $ sudo apt purge -y nodejs npm
 ```
 $ npm init
 $ npm install --save-dev [package]
+$ tsc --init
 ```
 
 npmプロジェクトを復元する
 
 ワカラナイ…
+
