@@ -1,0 +1,10 @@
+"use strict";
+var canvas = document.createElement("canvas");
+canvas.width = 800;
+canvas.height = 600;
+document.body.appendChild(canvas);
+var ctx = canvas.getContext("2d");
+ctx.beginPath();
+ctx.fillStyle = "#abc";
+ctx.rect(100, 100, 200, 200);
+ctx.fill();
