@@ -7,7 +7,7 @@ node.jsとnpmをaptでインストール
 ```
 $ sudo apt install -y nodejs npm
 $ npm config set strict-ssl false
-$ sudo npm install n -g 
+$ sudo npm install -g n
 $ sudo npm install -g typescript
 $ npm config set strict-ssl true
 ```

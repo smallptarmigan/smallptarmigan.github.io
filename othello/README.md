@@ -9,3 +9,11 @@ webのオセロゲームを作る。
 
 
 ## メモ
+
+
+## コンパイル方法
+
+```
+$ npm run tsc
+$ npm run watchify
+```
