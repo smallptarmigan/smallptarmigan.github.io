@@ -1,12 +1,12 @@
 class Board {
-    private turn: string;
     private data: number[][] = new Array();
+    private x:number = 0;
+    private y:number = 0;
 
     private SQLENGTH: number = 50;
     private INPOSLIST: number[][] = [[3,3,0],[3,4,1],[4,3,1],[4,4,0]];
     
-    constructor(turn: string){
-        this.turn = turn;
+    constructor(){
         for (var i=0; i<8; i++){
             this.data[i] = new Array();
             for (var j=0; j<8; j++){
@@ -19,16 +19,16 @@ class Board {
         }
     }
 
-    public setTurn(turn: string): void{
-        this.turn = turn
-    }
-
-    public getTurn(): string{
-        return this.turn;
-    }
-
     public getData(): number[][]{
         return this.data;
+    }
+
+    // クリック時の動作
+    private onClick(e: any) {
+        var rect = e.target.getBoundingClientRect();
+        this.x = e.clientX - rect.left;
+        this.y = e.clientY - rect.top;
+        console.log(this.x, this.y)
     }
 
     // ボードを描画
@@ -87,12 +87,24 @@ class Board {
         canvas.width = this.SQLENGTH*10;
         canvas.height = this.SQLENGTH*10;
         document.body.appendChild(canvas);
+        canvas.addEventListener('click', this.onClick, false);
 
         this.drowBoard(canvas)
         this.drowOthello(canvas)
     }
+
+    
 }
 
+class Game {
+    private mainboard = new Board();
 
-var mainboard = new Board("AI");
-mainboard.drow();
+    public Main(): void{
+        this.mainboard.drow();
+
+
+    }
+}
+
+var script = new Game;
+script.Main()

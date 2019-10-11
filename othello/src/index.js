@@ -1,10 +1,11 @@
 "use strict";
 var Board = /** @class */ (function () {
-    function Board(turn) {
+    function Board() {
         this.data = new Array();
+        this.x = 0;
+        this.y = 0;
         this.SQLENGTH = 50;
         this.INPOSLIST = [[3, 3, 0], [3, 4, 1], [4, 3, 1], [4, 4, 0]];
-        this.turn = turn;
         for (var i = 0; i < 8; i++) {
             this.data[i] = new Array();
             for (var j = 0; j < 8; j++) {
@@ -16,14 +17,15 @@ var Board = /** @class */ (function () {
             this.data[this.INPOSLIST[i][0]][this.INPOSLIST[i][1]] = this.INPOSLIST[i][2];
         }
     }
-    Board.prototype.setTurn = function (turn) {
-        this.turn = turn;
-    };
-    Board.prototype.getTurn = function () {
-        return this.turn;
-    };
     Board.prototype.getData = function () {
         return this.data;
+    };
+    // クリック時の動作
+    Board.prototype.onClick = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        this.x = e.clientX - rect.left;
+        this.y = e.clientY - rect.top;
+        console.log(this.x, this.y);
     };
     // ボードを描画
     Board.prototype.drowBoard = function (canvas) {
@@ -76,10 +78,20 @@ var Board = /** @class */ (function () {
         canvas.width = this.SQLENGTH * 10;
         canvas.height = this.SQLENGTH * 10;
         document.body.appendChild(canvas);
+        canvas.addEventListener('click', this.onClick, false);
         this.drowBoard(canvas);
         this.drowOthello(canvas);
     };
     return Board;
 }());
-var mainboard = new Board("AI");
-mainboard.drow();
+var Game = /** @class */ (function () {
+    function Game() {
+        this.mainboard = new Board();
+    }
+    Game.prototype.Main = function () {
+        this.mainboard.drow();
+    };
+    return Game;
+}());
+var script = new Game;
+script.Main();
