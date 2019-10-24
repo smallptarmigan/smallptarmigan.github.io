@@ -24,10 +24,10 @@ class Board {
     }
 
     // クリック時の動作
-    private onClick(e: any) {
+    private onClick(e: any): void{
         var rect = e.target.getBoundingClientRect();
-        this.x = e.clientX - rect.left;
-        this.y = e.clientY - rect.top;
+        this.x = (e.clientX - rect.left) / this.SQLENGTH;
+        this.y = (e.clientY - rect.top);
         console.log(this.x, this.y)
     }
 
@@ -100,7 +100,9 @@ class Game {
     private mainboard = new Board();
 
     public Main(): void{
+        
         this.mainboard.drow();
+        
 
 
     }

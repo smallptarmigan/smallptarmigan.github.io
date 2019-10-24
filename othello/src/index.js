@@ -23,8 +23,8 @@ var Board = /** @class */ (function () {
     // クリック時の動作
     Board.prototype.onClick = function (e) {
         var rect = e.target.getBoundingClientRect();
-        this.x = e.clientX - rect.left;
-        this.y = e.clientY - rect.top;
+        this.x = (e.clientX - rect.left) / this.SQLENGTH;
+        this.y = (e.clientY - rect.top);
         console.log(this.x, this.y);
     };
     // ボードを描画
