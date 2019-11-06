@@ -17,6 +17,7 @@ var Board = /** @class */ (function () {
             this.data[this.INPOSLIST[i][0]][this.INPOSLIST[i][1]] = this.INPOSLIST[i][2];
         }
     }
+    //　I/O
     Board.prototype.getData = function () {
         return this.data;
     };
@@ -89,6 +90,14 @@ var Game = /** @class */ (function () {
         this.mainboard = new Board();
     }
     Game.prototype.Main = function () {
+        var TURN;
+        (function (TURN) {
+            TURN[TURN["AI"] = 0] = "AI";
+            TURN[TURN["PL"] = 1] = "PL";
+        })(TURN || (TURN = {}));
+        ;
+        var n_trun = TURN.AI;
+        console.log(n_trun);
         this.mainboard.drow();
     };
     return Game;

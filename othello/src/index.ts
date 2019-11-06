@@ -19,6 +19,7 @@ class Board {
         }
     }
 
+    //　I/O
     public getData(): number[][]{
         return this.data;
     }
@@ -100,6 +101,9 @@ class Game {
     private mainboard = new Board();
 
     public Main(): void{
+        enum TURN {AI, PL};
+        var n_trun = TURN.AI;
+        console.log(n_trun);
         
         this.mainboard.drow();
         
@@ -107,6 +111,7 @@ class Game {
 
     }
 }
+
 
 var script = new Game;
 script.Main()

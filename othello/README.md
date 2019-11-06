@@ -14,6 +14,7 @@ webのオセロゲームを作る。
 ## コンパイル方法
 
 ```
+$ cd othello
 $ npm run tsc
 $ npm run watchify
 ```
