@@ -98,7 +98,11 @@ var Game = /** @class */ (function () {
         ;
         var n_trun = TURN.AI;
         console.log(n_trun);
+        // ターンの決定
+        // 描画
         this.mainboard.drow();
+        // 置ける場所リストを生成
+        // コマを置く
     };
     return Game;
 }());

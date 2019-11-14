@@ -7,6 +7,7 @@ class Board {
     private INPOSLIST: number[][] = [[3,3,0],[3,4,1],[4,3,1],[4,4,0]];
     
     constructor(){
+        
         for (var i=0; i<8; i++){
             this.data[i] = new Array();
             for (var j=0; j<8; j++){
@@ -104,9 +105,18 @@ class Game {
         enum TURN {AI, PL};
         var n_trun = TURN.AI;
         console.log(n_trun);
-        
+
+        // ターンの決定
+
+
+        // 描画
         this.mainboard.drow();
-        
+
+        // 置ける場所リストを生成
+
+
+        // コマを置く
+
 
 
     }
