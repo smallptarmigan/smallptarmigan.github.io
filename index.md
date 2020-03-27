@@ -6,5 +6,5 @@
 
 * [オセロ](./othello/temp.html)
 
-* [成績チェッカー](./course_confirmation)
+* [成績チェッカー](./course_confirmation/index.html)
 
