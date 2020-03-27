@@ -17,6 +17,49 @@
 
 <body class="text-center">
 
+    <h2>成績チェッカー</h2>
+
+    <p>情報工学研究科 博士前期課程</p>
+
+    <p>
+        <label><input type="radio" name="radio1" id="year" value="2019"> 2019年入学</label>
+        <label><input type="radio" name="radio1" id="year" value="2020"> 2020年入学</label>
+    </p>
+
+    <p>
+        <label><input type="radio" name="radio2" id="course" value="0"> 研究領域</label>
+        <label><input type="radio" name="radio2" id="course" value="1"> 創成工学</label>
+    </p>
+
+    <table class="table">
+        <thead class="thead-lignt">
+            <tr>
+                <th>専攻指定特論科目</th>
+                <th>研究科共通科目</th>
+                <th>国際教育科目</th>
+                <th>研究領域特論科目</th>
+                <th>研究領域演習科目</th>
+                <th>創成工学教育科目</th>
+                <th>特別研究</th>
+            </tr>
+        </thead>
+        <thead class="lignt">
+            <tr>
+                <td><div class="checkbox"><label><input type="checkbox" value="">ソフトウェア基礎特論</label></div></td>
+                <td>研究科共通科目</td>
+                <td>国際教育科目</td>
+                <td>研究領域特論科目</td>
+                <td>研究領域演習科目</td>
+                <td>創成工学教育科目</td>
+                <td><div class="checkbox"><label><input type="checkbox" value="">情報工学特別研究Ⅰ</label></div></td>
+            </tr>
+
+        </thead>
+    </table>
+
+
+    <button type="button" onclick="OnButtonClick();" class="btn btn-primary">チェック</button>
+
 </body>
 
 </html>
