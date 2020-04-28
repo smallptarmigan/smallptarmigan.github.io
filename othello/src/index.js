@@ -24,10 +24,11 @@ var Board = /** @class */ (function () {
     // クリック時の動作
     Board.prototype.onClick = function (e) {
         var rect = e.target.getBoundingClientRect();
-        this.x = (e.clientX - rect.left) / this.SQLENGTH;
-        this.y = (e.clientY - rect.top);
-        console.log(this.x, this.y);
+        this.x = Math.floor((e.clientX - 58) / this.SQLENGTH);
+        this.y = Math.floor((e.clientY - 58) / this.SQLENGTH);
+        console.log(e.clientX, e.clientY, this.x, this.y);
     };
+    // 
     // ボードを描画
     Board.prototype.drowBoard = function (canvas) {
         var ctx = canvas.getContext("2d");
@@ -85,10 +86,23 @@ var Board = /** @class */ (function () {
     };
     return Board;
 }());
+var TURN = /** @class */ (function () {
+    function TURN() {
+    }
+    return TURN;
+}());
 var Game = /** @class */ (function () {
     function Game() {
         this.mainboard = new Board();
     }
+    Game.prototype.getRandomTrun = function (max) {
+        return Math.floor(Math.random() * (max + 1));
+    };
+    Game.prototype.processPhase = function () {
+        var continueflag = 0;
+        this.mainboard.drow();
+        return continueflag;
+    };
     Game.prototype.Main = function () {
         var TURN;
         (function (TURN) {
@@ -97,12 +111,19 @@ var Game = /** @class */ (function () {
         })(TURN || (TURN = {}));
         ;
         var n_trun = TURN.AI;
+        var i = 10;
         console.log(n_trun);
         // ターンの決定
+        n_trun = this.getRandomTrun(2);
         // 描画
-        this.mainboard.drow();
+        this.processPhase();
+        while (i >= 0) {
+            console.info(i);
+            i--;
+        }
         // 置ける場所リストを生成
         // コマを置く
+        // 結果
     };
     return Game;
 }());

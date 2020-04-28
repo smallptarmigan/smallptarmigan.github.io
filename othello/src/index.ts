@@ -27,10 +27,12 @@ class Board {
     // クリック時の動作
     private onClick(e: any): void{
         var rect = e.target.getBoundingClientRect();
-        this.x = (e.clientX - rect.left) / this.SQLENGTH;
-        this.y = (e.clientY - rect.top);
-        console.log(this.x, this.y)
+        this.x = Math.floor((e.clientX - 58)/this.SQLENGTH);
+        this.y = Math.floor((e.clientY - 58)/this.SQLENGTH);
+        console.log(e.clientX, e.clientY, this.x, this.y)
     }
+
+    // 
 
     // ボードを描画
     private drowBoard(canvas: any): void{
@@ -108,6 +110,15 @@ class Game {
         return Math.floor(Math.random() * (max + 1));
     }
 
+    public processPhase(): number{
+        let continueflag:number = 0;
+
+        this.mainboard.drow();
+
+
+        return continueflag;
+    }
+
     public Main(): void{
         enum TURN {AI, PL};
         var n_trun: number = TURN.AI;
@@ -118,17 +129,18 @@ class Game {
         n_trun = this.getRandomTrun(2);
 
         // 描画
-        this.mainboard.drow();
-        
+        this.processPhase()
+
         while (i >= 0) {
             console.info(i);
             i--;
         }
 
         // 置ける場所リストを生成
-
+        
 
         // コマを置く
+
 
         // 結果
 
