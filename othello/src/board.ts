@@ -24,12 +24,12 @@ export class Board {
         return this.data;
     }
 
-    // クリック時の動作
+    // クリックハンドラ
     private onClick(e: any): void{
         var rect = e.target.getBoundingClientRect();
-        this.x = Math.floor((e.clientX - 58) / this.SQLENGTH);
+        this.x = Math.floor((e.clientX - 58) / 50);
         this.y = Math.floor((e.clientY - 58) / 50);
-        console.log(e.clientX, e.clientY, this.x, this.y)
+        console.log(e.clientX, e.clientY, this.x, this.y);
     }
 
     // ボードを描画
@@ -89,7 +89,6 @@ export class Board {
         canvas.height = this.SQLENGTH*10;
         document.body.appendChild(canvas);
         canvas.addEventListener('click', this.onClick, false);
-
         this.drowBoard(canvas)
         this.drowOthello(canvas)
     }
