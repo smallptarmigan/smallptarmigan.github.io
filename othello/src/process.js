@@ -61,8 +61,6 @@ function getFlipCellsOneDir(i, j, dx, dy, color){
     var y = j + dy;
     var fliped = [];
 
-    console.log(x,y);
-
     // 盤外、同色、空の時
     if(x<0 || y<0 || x>7 || y>7 || boarddata[x][y]==color || boarddata[x][y]==0){
         return []; 

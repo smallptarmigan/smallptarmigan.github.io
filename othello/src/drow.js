@@ -32,35 +32,38 @@ function DrowLine(){
 
 // 駒を描画
 function DrowPiece(){
-    // パスの設定を開始
-    ctx.beginPath();
-    // 駒の色を設定する
-    ctx.fillStyle = PIECE_BLACK_COLOR;
+    
     // 円を描くパスを設定
     for(let i=0; i<8; i++){
         for(let j=0; j<8; j++){
             if(boarddata[i][j]==BLACK){
+                // パスの設定を開始
+                ctx.beginPath();
+                // 駒の色を設定する
+                ctx.fillStyle = PIECE_BLACK_COLOR;
+                // 円を描くパスを設定
                 ctx.arc(wakusize*i+wakusize/2, wakusize*j+wakusize/2, wakusize/2-2, 0 * Math.PI/180, 360*Math.PI/180, false);
+                // 円を描く
+                ctx.fill();
             }
         }
     }
-    // 円を描く
-    ctx.fill();
-
-    // パスの設定を開始
-    ctx.beginPath();
-    // 駒の色を設定する
-    ctx.fillStyle = PIECE_WHITE_COLOR;
+    
     // 円を描くパスを設定
     for(let i=0; i<8; i++){
         for(let j=0; j<8; j++){
             if(boarddata[i][j]==WHITE){
+                // パスの設定を開始
+                ctx.beginPath();
+                // 駒の色を設定する
+                ctx.fillStyle = PIECE_WHITE_COLOR;
+                // 円を描くパスを設定
                 ctx.arc(wakusize*i+wakusize/2, wakusize*j+wakusize/2, wakusize/2-2, 0 * Math.PI/180, 360*Math.PI/180, false);
+                // 円を描く
+                ctx.fill();
             }
         }
     }
-    // 円を描く
-    ctx.fill();
 }
 
 // 選択マスの描画
