@@ -1,12 +1,15 @@
 // - global -------------------------------------------------------------------
-var screenCanvas, info;
+var screenCanvas, info, gamemessage;
 var run = true;
 var fps = 1000 / 30;
 var mouse = new Point();
 var ctx_cell, ctx_board;
-var turn = false;
+var turn = true;
+var pcolor;
 var boarddata = JSON.parse(JSON.stringify((new Array(8)).fill((new Array(8)).fill(0))));
-var gamemode = true
+var log = [];
+var gamemode = true;
+var message = "";
 
 // - const --------------------------------------------------------------------
 var BLACK = 1
@@ -29,19 +32,24 @@ window.onload = function(){
 
     // イベントの登録
     screenCanvas.addEventListener('mousemove', mouseMove, true);
-    screenCanvas.addEventListener('mousedown', mouseDown, true);
+    screenCanvas.addEventListener('mouseup', mouseUp, true);
     window.addEventListener('keydown', keyDown, true);
 
     // エレメント関連
     info = document.getElementById('info');
+    gamemessage = document.getElementById('gamemessage');
     
     // 盤面の初期化
-    initboard();
+    initBoard();
+
+    // ターンの決定
+    pcolor = BLACK;
 
     // ループ処理を呼び出す
     (function(){
         // HTMLを更新
         info.innerHTML = mouse.x + ' : ' + mouse.y;
+        gamemessage.innerHTML = message;
 
         // screenクリア 
         ctx.clearRect(0, 0, screenCanvas.width, screenCanvas.height);
@@ -77,7 +85,28 @@ function keyDown(event){
     if(ck === 27){run = false;}
 }
 
-function mouseDown(event){
-    // フラグを立てる
-    turn = true;
+function mouseUp(event){
+    // プレイヤーのターンの時動作
+    if(turn){
+        
+        // 選択マス座標計算
+        mouse.x = event.clientX - screenCanvas.offsetLeft;
+        mouse.y = event.clientY - screenCanvas.offsetTop;
+        cellx = mouse.x / wakusize | 0;
+        celly = mouse.y / wakusize | 0;
+
+        // 
+        var flipped = getFlipCells(cellx, celly, pcolor);
+        if (flipped.length>0){
+            for(var k=0; k<flipped.length; k++){
+                putPiece(flipped[k][0], flipped[k][1], pcolor);
+            }
+            putPiece(cellx, celly, pcolor);
+            turn = false;
+        }
+    }
+    else{
+        // PCの思考中
+        return;
+    }
 }
