@@ -3,6 +3,12 @@ var screenCanvas, info;
 var run = true;
 var fps = 1000 / 30;
 var mouse = new Point();
+var ctx;
+var turn = false;
+
+// - const --------------------------------------------------------------------
+var PIECE_BLACK_COLOR = 'rgba(0, 0, 0, 1)';
+var PIECE_WHITE_COLOR = 'rgba(255, 255, 255, 1)';
 
 // - main ---------------------------------------------------------------------
 window.onload = function(){
@@ -19,6 +25,7 @@ window.onload = function(){
 
     // イベントの登録
     screenCanvas.addEventListener('mousemove', mouseMove, true);
+    screenCanvas.addEventListener('mousedown', mouseDown, true);
     window.addEventListener('keydown', keyDown, true);
 
     // エレメント関連
@@ -39,9 +46,9 @@ window.onload = function(){
         ctx.fillStyle = 'rgba(255, 255, 0, 0.75)';
 
         // 四角を描くパスを設定
-        x = mouse.x / wakusize | 0;
-        y = mouse.y / wakusize | 0;
-        ctx.rect(x*wakusize, y*wakusize, wakusize, wakusize);
+        cellx = mouse.x / wakusize | 0;
+        celly = mouse.y / wakusize | 0;
+        ctx.rect(cellx*wakusize, celly*wakusize, wakusize, wakusize);
 
         // 四角を描く
         ctx.fill();
@@ -61,8 +68,11 @@ function mouseMove(event){
 function keyDown(event){
     // キーコードを取得
     var ck = event.keyCode;
-
     // Escキーが押されていたらフラグを降ろす
     if(ck === 27){run = false;}
 }
 
+function mouseDown(event){
+    // フラグを立てる
+    turn = true;
+}
