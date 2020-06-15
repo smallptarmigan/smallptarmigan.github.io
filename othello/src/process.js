@@ -12,6 +12,11 @@ PiecePut.prototype.set = function(p){
     this.exist = true;
 }
 
+// - system --------------------------------------------------------------------
+function reset() {
+    document.location.reload(false);
+}
+
 // - game --------------------------------------------------------------------
 
 // 盤面の初期化を行う
