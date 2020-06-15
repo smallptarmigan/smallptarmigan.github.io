@@ -21,8 +21,8 @@ function reset() {
 
 // 盤面の初期化を行う
 function initBoard(){
-    boarddata[3][3] = boarddata[4][4] = BLACK;
-    boarddata[4][3] = boarddata[3][4] = WHITE;
+    boarddata[3][3] = boarddata[4][4] = WHITE;
+    boarddata[4][3] = boarddata[3][4] = BLACK;
 }
 
 // 駒を置く
