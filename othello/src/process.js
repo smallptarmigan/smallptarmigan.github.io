@@ -139,43 +139,53 @@ function copyData(){
 
 // コンピュータの思考
 function think(){
-    var highscore = -1000;
-    var px = -1; py = -1;
-    for(var x=0; x<8; x++){
-        for(var y=0; y<8; y++){
-            var tmpData = copyData();
-            var flipped = getFlipCells(x, y, ccolor);
-            if(flipped.length>0){
-                for(var i=0; i<flipped.length; i++){
-                    var p = flipped[i][0];
-                    var q = flipped[i][1];
-                    tmpData[p][q] = ccolor;
-                    tmpData[x][y] = ccolor;
-                }
-                var score = calcweightData(tmpData);
-                if(score > highscore){
-                    highscore = score;
-                    px = x, py = y;
+    sleep(THINKING_TIME, function() {
+        var highscore = -1000;
+        var px = -1; py = -1;
+        for(var x=0; x<8; x++){
+            for(var y=0; y<8; y++){
+                var tmpData = copyData();
+                var flipped = getFlipCells(x, y, ccolor);
+                if(flipped.length>0){
+                    for(var i=0; i<flipped.length; i++){
+                        var p = flipped[i][0];
+                        var q = flipped[i][1];
+                        tmpData[p][q] = ccolor;
+                        tmpData[x][y] = ccolor;
+                    }
+                    var score = calcweightData(tmpData);
+                    if(score > highscore){
+                        highscore = score;
+                        px = x, py = y;
+                    }
                 }
             }
         }
-    }
-    if(px >= 0 && py >= 0){
-        var flipped = getFlipCells(px, py, ccolor);
-        if(flipped.length>0){
-            for (var k=0; k<flipped.length; k++){
-                putPiece(flipped[k][0], flipped[k][1], ccolor);
-            }  
+        if(px >= 0 && py >= 0){
+            var flipped = getFlipCells(px, py, ccolor);
+            if(flipped.length>0){
+                for (var k=0; k<flipped.length; k++){
+                    putPiece(flipped[k][0], flipped[k][1], ccolor);
+                }  
+            }
+            putPiece(px, py, ccolor);
+            log.push([px, py, ccolor]);
         }
-        putPiece(px, py, ccolor);
-        log.push([px, py, ccolor]);
-    }
-    turn = true;
+        turn = true;
+    });
 }
 
 // スリープ
-function sleep(waitSec) {
-    return new Promise(function (resolve) {
-        setTimeout(function() { resolve() }, waitSec);
-    });
-} 
+function sleep(waitSec, callbackFunc) {
+    var spanedSec = 0;
+    var waitFunc = function () {
+        spanedSec++;
+        if (spanedSec >= waitSec) {
+            if (callbackFunc) callbackFunc();
+            return;
+        }
+        clearTimeout(id);
+        id = setTimeout(waitFunc, 100);
+    };
+    var id = setTimeout(waitFunc, 100);
+}

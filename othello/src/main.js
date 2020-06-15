@@ -1,7 +1,7 @@
 // - global -------------------------------------------------------------------
 var screenCanvas, info, gamemessage;
 var run = true;
-var fps = 1000 / 30;
+var fps = 1000/30;
 var mouse = new Point();
 var ctx_cell, ctx_board;
 var turn = true;
@@ -16,12 +16,13 @@ var BLACK = 1
 var WHITE = 2
 var PIECE_BLACK_COLOR = 'rgba(0, 0, 0, 1)';
 var PIECE_WHITE_COLOR = 'rgba(255, 255, 255, 1)';
+var THINKING_TIME = 3;  // 5 -> 0.5s
 
 // - main ---------------------------------------------------------------------
 window.onload = function(){
 
     // スクリーンの初期化
-    screensize = 400
+    screensize = 600
     wakusize = screensize / 8
     screenCanvas = document.getElementById('screen');
     screenCanvas.width = screensize;
@@ -66,6 +67,10 @@ window.onload = function(){
             // 選択マスの描画
             DrowSelect();            
         }
+
+        // 駒の数の表示
+        infomes = "black:"+countPiece(BLACK)+" white:"+countPiece(WHITE);
+
 
         // フラグにより再帰呼び出し
         if(run){setTimeout(arguments.callee, fps);}
@@ -114,9 +119,6 @@ function mouseUp(event){
             // PCの思考中
             think();
         }
-
-        // 駒の数
-        infomes = "black:"+countPiece(BLACK)+" white:"+countPiece(WHITE);
 
         // ゲーム終了
         if(!canFlip(pcolor) && !canFlip(ccolor)){
