@@ -5,11 +5,11 @@ var fps = 1000 / 30;
 var mouse = new Point();
 var ctx_cell, ctx_board;
 var turn = true;
-var pcolor;
+var pcolor, ccolor;
 var boarddata = JSON.parse(JSON.stringify((new Array(8)).fill((new Array(8)).fill(0))));
 var log = [];
 var gamemode = true;
-var message = "";
+var message = "", infomes = "";
 
 // - const --------------------------------------------------------------------
 var BLACK = 1
@@ -44,11 +44,12 @@ window.onload = function(){
 
     // ターンの決定
     pcolor = BLACK;
+    ccolor = WHITE;
 
     // ループ処理を呼び出す
     (function(){
         // HTMLを更新
-        info.innerHTML = mouse.x + ' : ' + mouse.y;
+        info.innerHTML = infomes;
         gamemessage.innerHTML = message;
 
         // screenクリア 
@@ -86,27 +87,54 @@ function keyDown(event){
 }
 
 function mouseUp(event){
-    // プレイヤーのターンの時動作
-    if(turn){
-        
-        // 選択マス座標計算
-        mouse.x = event.clientX - screenCanvas.offsetLeft;
-        mouse.y = event.clientY - screenCanvas.offsetTop;
-        cellx = mouse.x / wakusize | 0;
-        celly = mouse.y / wakusize | 0;
+    
+    // ゲーム中のマウス処理
+    if(gamemode){
+        // プレイヤーのターンの時動作
+        if(turn && canFlip(pcolor)){
+            // 選択マス座標計算
+            mouse.x = event.clientX - screenCanvas.offsetLeft;
+            mouse.y = event.clientY - screenCanvas.offsetTop;
+            cellx = mouse.x / wakusize | 0;
+            celly = mouse.y / wakusize | 0;
 
-        // 
-        var flipped = getFlipCells(cellx, celly, pcolor);
-        if (flipped.length>0){
-            for(var k=0; k<flipped.length; k++){
-                putPiece(flipped[k][0], flipped[k][1], pcolor);
+            // 駒を置く
+            var flipped = getFlipCells(cellx, celly, pcolor);
+            if (flipped.length>0){
+                for(var k=0; k<flipped.length; k++){
+                    putPiece(flipped[k][0], flipped[k][1], pcolor);
+                }
+                putPiece(cellx, celly, pcolor);
+                log.push([cellx, celly, pcolor]);
+                turn = false;
+                think();
             }
-            putPiece(cellx, celly, pcolor);
-            turn = false;
         }
-    }
-    else{
-        // PCの思考中
-        return;
+        else{
+            // PCの思考中
+            think();
+        }
+
+        // 駒の数
+        infomes = "black:"+countPiece(BLACK)+" white:"+countPiece(WHITE);
+
+        // ゲーム終了
+        if(!canFlip(pcolor) && !canFlip(ccolor)){
+            if(countPiece(BLACK)==countPiece(WHITE)){
+                message = "draw";
+            }
+            else if(countPiece(BLACK)<countPiece(WHITE)){
+                message = "win white player";
+            }
+            else{
+                message = "win black player";
+            }
+            //run = false;
+        }
+
+        //　デバックメッセージ
+        //console.log("turn : "+turn);
+        //console.log("canfliped "+pcolor+" : "+canFlip(pcolor));
+        //console.log("canfliped "+ccolor+" : "+canFlip(ccolor));
     }
 }

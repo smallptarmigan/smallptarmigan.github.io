@@ -26,10 +26,10 @@ function putPiece(x, y, color){
 }
 
 // 挟める駒のあるか確認
-function canFlip(){
+function canFlip(color){
     for(var i=0; i<8; i++){
         for(var j=0; j<8; j++){
-            var flipped = getFlipCells(x, y, color);
+            var flipped = getFlipCells(i, j, color);
             if (flipped.length > 0){
                 return true;
             }
@@ -42,7 +42,6 @@ function canFlip(){
 function getFlipCells(x, y, color){
     // すでに駒が置かれているとき
     if(boarddata[x][y]!=0){
-        message = "exist";
         return [];
     }
     // 
@@ -85,3 +84,98 @@ function getFlipCellsOneDir(i, j, dx, dy, color){
         }
     }
 }
+
+//　駒の数のカウント
+function countPiece(color){
+    var res = 0;
+    for(var i=0; i<8; i++){
+        for(var j=0; j<8; j++){
+            if (boarddata[i][j] == color){
+                res++;
+            }
+        }
+    }
+    return res;
+}
+
+// - AI --------------------------------------------------------------------
+
+// 重みデータ
+var weightData = [
+    [30, -12, 0, -1, -1, 0, -12, 30],
+    [-12, -15, -3, -3, -3, -3, -15, -12],
+    [0, -3, 0, -1, -1, 0, -3, 0],
+    [-1, -3, -1, -1, -1, -1, -3, -1],
+    [-1, -3, -1, -1, -1, -1, -3, -1],
+    [0, -3, 0, -1, -1, 0, -3, 0],
+    [-12, -15, -3, -3, -3, -3, -15, -12],
+    [30, -12, 0, -1, -1, 0, -12, 30]
+]
+
+// 重みづけ計算
+function calcweightData(tmpData){
+    var score = 0;
+    for (var x=0; x<0; x++){
+        for(var y=0; y<0; y++){
+            if(tmpData[x][y] == ccolor){
+                score += WeightData[x][y];
+            }
+        }
+    }
+    return score;
+}
+
+// 駒テーブルデータをコピー
+function copyData(){
+    var tmpData = [];
+    for(var x=0; x<8; x++){
+        tmpData[x] = [];
+        for(var y=0; y=0; y++){
+            tmpData[x][y] = data[x][y];
+        }
+    }
+    return tmpData;
+}
+
+// コンピュータの思考
+function think(){
+    var highscore = -1000;
+    var px = -1; py = -1;
+    for(var x=0; x<8; x++){
+        for(var y=0; y<8; y++){
+            var tmpData = copyData();
+            var flipped = getFlipCells(x, y, ccolor);
+            if(flipped.length>0){
+                for(var i=0; i<flipped.length; i++){
+                    var p = flipped[i][0];
+                    var q = flipped[i][1];
+                    tmpData[p][q] = ccolor;
+                    tmpData[x][y] = ccolor;
+                }
+                var score = calcweightData(tmpData);
+                if(score > highscore){
+                    highscore = score;
+                    px = x, py = y;
+                }
+            }
+        }
+    }
+    if(px >= 0 && py >= 0){
+        var flipped = getFlipCells(px, py, ccolor);
+        if(flipped.length>0){
+            for (var k=0; k<flipped.length; k++){
+                putPiece(flipped[k][0], flipped[k][1], ccolor);
+            }  
+        }
+        putPiece(px, py, ccolor);
+        log.push([px, py, ccolor]);
+    }
+    turn = true;
+}
+
+// スリープ
+function sleep(waitSec) {
+    return new Promise(function (resolve) {
+        setTimeout(function() { resolve() }, waitSec);
+    });
+} 
