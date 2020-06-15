@@ -39,7 +39,8 @@ window.onload = function(){
     // エレメント関連
     info = document.getElementById('info');
     gamemessage = document.getElementById('gamemessage');
-    
+    twitter = document.getElementById('twitter');
+
     // 盤面の初期化
     initBoard();
 
@@ -52,7 +53,7 @@ window.onload = function(){
         // HTMLを更新
         info.innerHTML = infomes;
         gamemessage.innerHTML = message;
-
+        
         // screenクリア 
         ctx.clearRect(0, 0, screenCanvas.width, screenCanvas.height);
         
@@ -70,7 +71,6 @@ window.onload = function(){
 
         // 駒の数の表示
         infomes = "black:"+countPiece(BLACK)+" white:"+countPiece(WHITE);
-
 
         // フラグにより再帰呼び出し
         if(run){setTimeout(arguments.callee, fps);}
@@ -131,7 +131,8 @@ function mouseUp(event){
             else{
                 message = "win black player";
             }
-            //run = false;
+            twittermes = '<a href="https://twitter.com/share" class="twitter-share-button" data-text="">Tweet</a>';
+            twitter.innerHTML = twittermes;
         }
 
         //　デバックメッセージ
